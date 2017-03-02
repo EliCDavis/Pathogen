@@ -24,7 +24,7 @@ namespace Pathogen.Player {
 
 		// Use this for initialization
 		void Start () {
-			this.playerSpeed = 5f;
+			this.playerSpeed = 10f;
 			this.rotateSpeed = 90f;
 			this.health = MAX_HEALTH;
 		}
@@ -35,7 +35,6 @@ namespace Pathogen.Player {
 			turn (new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")), boundsForPlayerMovement);
 		}
 
-		Vector3 currentTargetToLookAtForProperRotation = new Vector3 (0, 0);
 
 		/// <summary>
 		/// Pivots the player towards the direction.
@@ -49,14 +48,11 @@ namespace Pathogen.Player {
 			transform.Translate (new Vector3 (direction.x * Time.deltaTime * playerSpeed, direction.y * Time.deltaTime * playerSpeed));
 
 			// Rotate properly to look in the direction we're flying..
-			Vector3 lookDirection = graphics.transform.forward*2;
-			currentTargetToLookAtForProperRotation += new Vector3 (-1 * direction.y * Time.deltaTime * rotateSpeed, direction.x * Time.deltaTime * rotateSpeed);
-			graphics.transform.LookAt (currentTargetToLookAtForProperRotation);
+			Vector3 lookDirection = transform.forward*2;
+			lookDirection += transform.right * direction.x * 2;
+			lookDirection += transform.up * direction.y * 2;
+			graphics.transform.LookAt (lookDirection + graphics.transform.position);
 
-			// Reset rotation on z axis.
-			Vector3 rot = graphics.transform.localEulerAngles;
-			rot.z = 0;
-			graphics.transform.localEulerAngles = rot;
 
 		}
 
