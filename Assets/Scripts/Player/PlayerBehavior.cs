@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.ImageEffects;
+using UnityStandardAssets.Cameras;
 
 namespace Pathogen.Player {
 
 	public class PlayerBehavior : MonoBehaviour {
 
 		private float playerSpeed;
-		private float rotateSpeed;
 
 		static readonly int MAX_HEALTH = 100;
 
@@ -23,10 +24,10 @@ namespace Pathogen.Player {
 		/// </summary>
 		private GameObject bulletPrefab;
 
+		[SerializeField]
 		/// <summary>
 		/// The graphics used to display the character.
 		/// </summary>
-		[SerializeField]
 		private GameObject graphics;
 
 		private int health;
@@ -37,10 +38,21 @@ namespace Pathogen.Player {
 		[SerializeField]
 		private float maxDistanceFromVeinCenter;
 
+		[SerializeField]
+		/// <summary>
+		/// The camera that is following the player
+		/// </summary>
+		private GameObject playerCamera;
+
+		[SerializeField]
+		/// <summary>
+		/// The effect that will play when the player dies
+		/// </summary>
+		private GameObject deathEffect;
+
 		// Use this for initialization
 		void Start () {
 			this.playerSpeed = 10f;
-			this.rotateSpeed = 90f;
 			this.health = MAX_HEALTH;
 		}
 		
@@ -86,10 +98,28 @@ namespace Pathogen.Player {
 		/// Damage the player by a finite amount.
 		/// </summary>
 		/// <param name="damage">Amount of damage to hurt the player by</param>
-		public void Damage(int damage){
+		public void Damage(int damage, DamageType typeOfDamage){
+
 			health = Mathf.Max (health - Mathf.Abs(damage), 0);
 			if (health == 0) {
-				Die ("You took too much damage!");
+
+				string deathMessage;
+
+				switch (typeOfDamage) {
+
+				case DamageType.Collision:
+					deathMessage = "Stop running into things!";
+					break;
+
+				default:
+					deathMessage = "You took too much damage!";
+					break;
+
+				}
+
+				Die (deathMessage);
+			} else {
+				StartCoroutine (AnimateTakingDamage (damage, playerCamera.GetComponent<CameraMotionBlur>()));
 			}
 		}
 
@@ -109,11 +139,21 @@ namespace Pathogen.Player {
 		}
 
 		/// <summary>
-		/// Die the specified reason.
+		/// Destroys the player object and ends the game.
 		/// </summary>
 		/// <param name="reason">Reason the player died.</param>
 		private void Die(string reason){
+			playerCamera.transform.parent = null;
+			Destroy (playerCamera.GetComponent<ProtectCameraFromWallClip> ());
+			GameObject deathEffectInstance = Instantiate (deathEffect, graphics.transform.position, Quaternion.identity);
+			Destroy (deathEffectInstance, .95f);
 			Destroy (transform.gameObject);
+		}
+
+		private IEnumerator AnimateTakingDamage(int amountOfDamage, CameraMotionBlur blur){
+			blur.velocityScale = 34;
+			yield return new WaitForSeconds(.5f);
+			blur.velocityScale = 0;
 		}
 
 	}
