@@ -89,6 +89,8 @@ GameObject:
   - component: {fileID: 92007071209086910}
   - component: {fileID: 124612767627025272}
   - component: {fileID: 81675839914518086}
+  - component: {fileID: 114134213802796616}
+  - component: {fileID: 114445123240300564}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -135,7 +137,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4186732389420116}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 19.47, y: 0, z: 0}
 --- !u!4 &4186732389420116
 Transform:
@@ -147,8 +149,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 2.92, z: -482.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4081377998840568}
   - {fileID: 4591847327963618}
+  - {fileID: 4081377998840568}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -179,7 +181,7 @@ Transform:
   - {fileID: 4949741009779438}
   - {fileID: 4059096408827650}
   m_Father: {fileID: 4186732389420116}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4949741009779438
 Transform:
@@ -330,6 +332,23 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1936194932846996}
   m_Enabled: 1
+--- !u!114 &114134213802796616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1936194932846996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94b04ec3bda6b7747aa53936ef3b0ae2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clipMoveTime: 0.05
+  returnTime: 0.4
+  sphereCastRadius: 0.1
+  visualiseInEditor: 0
+  closestDistance: 0.5
+  dontClipTag: Player
 --- !u!114 &114219036904778794
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -342,9 +361,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpawn: {fileID: 4059096408827650}
+  bulletPrefab: {fileID: 1474379011980548, guid: 12260c8c8f51d324989168aee32664de,
+    type: 2}
   graphics: {fileID: 1764523650236648}
   veinCenter: {x: 0, y: 3}
-  maxDistanceFromVeinCenter: 0
+  maxDistanceFromVeinCenter: 5
+  playerCamera: {fileID: 1936194932846996}
+--- !u!114 &114445123240300564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1936194932846996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97e9b95cf609d96409b6c40519432957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filterType: 2
+  preview: 0
+  previewScale: {x: 1, y: 1, z: 1}
+  movementScale: 0
+  rotationScale: 1
+  maxVelocity: 8
+  minVelocity: 0.1
+  velocityScale: 0
+  softZDistance: 0.005
+  velocityDownsample: 1
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  shader: {fileID: 4800000, guid: 85a88efa8c871af4a9d17c64791b6f4f, type: 3}
+  dx11MotionBlurShader: {fileID: 4800000, guid: f1b13d7a80660504a858ea24cfa418c6,
+    type: 3}
+  replacementClear: {fileID: 4800000, guid: 7699c5fbfa27745a1abe111ab7bf9785, type: 3}
+  noiseTexture: {fileID: 2800000, guid: 31f5a8611c4ed1245b18456206e798dc, type: 3}
+  jitter: 0.05
+  showVelocity: 0
+  showVelocityScale: 1
 --- !u!124 &124612767627025272
 Behaviour:
   m_ObjectHideFlags: 1
