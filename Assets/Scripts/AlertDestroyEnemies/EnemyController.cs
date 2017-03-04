@@ -7,7 +7,7 @@ public class EnemyController : MonoBehaviour
     public Vector3 lastKnown;
     public GameObject alertPrefab;
     public GameObject destroyPrefab;
-
+    public int detected = 0;
 
     // Use this for initialization
     void Start()

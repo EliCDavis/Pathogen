@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Alert : MonoBehaviour{
+
     EnemyController reference;
+
+
 	// Use this for initialization
 	void Start () {
         //generate position to spawn
@@ -22,6 +25,7 @@ public class Alert : MonoBehaviour{
         {
             reference.spawnDestroy();
             reference.lastKnown = other.transform.position;
+            reference.detected = 1;
             //spawn destroy
             //update lastKnownPosition
         }
