@@ -19,7 +19,7 @@ namespace Pathogen.Scene.Veins {
 		}
 
 		void Update () {
-			lightToPulse.intensity = 1+ (Mathf.Sin (Time.time*heartBeat)*2) - (Mathf.Pow(Mathf.Sin(Time.time*heartBeat), 4)/.8f);
+			lightToPulse.intensity = 1+ Mathf.Max(0, (Mathf.Sin (Time.time*heartBeat)*2) - (Mathf.Pow(Mathf.Sin(Time.time*heartBeat), 4)/.8f));
 		}
 	}
 

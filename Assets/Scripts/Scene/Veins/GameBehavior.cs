@@ -18,6 +18,9 @@ namespace Pathogen.Scene.Veins {
 		/// </summary>
 		private GameState currentState = GameState.NotBegan;
 
+		[SerializeField]
+		private AudioSource heartBeatClip;
+
 		List<GameObject> veinsSpawned;
 
 		GameObject playerInstance;
@@ -25,6 +28,7 @@ namespace Pathogen.Scene.Veins {
 		void Start() {
 			veinsSpawned = new List<GameObject> ();
 			StartGame ();
+			StartCoroutine (AnimateHeartbeat ());
 		}
 
 		private void StartGame() {
@@ -52,6 +56,16 @@ namespace Pathogen.Scene.Veins {
 
 				yield return new WaitForSeconds(.5f);
 
+			}
+		}
+
+
+		private IEnumerator AnimateHeartbeat(){
+			while (heartBeatClip != null) {
+				yield return new WaitForSeconds(.1f);
+				if (!heartBeatClip.isPlaying && Mathf.Max (0, (Mathf.Sin (Time.time * 4) * 2) - (Mathf.Pow (Mathf.Sin (Time.time * 4), 4) / .8f)) > 1) {
+					heartBeatClip.Play ();
+				}
 			}
 		}
 
