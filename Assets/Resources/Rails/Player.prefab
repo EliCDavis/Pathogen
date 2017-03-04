@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 81675839914518086}
   - component: {fileID: 114134213802796616}
   - component: {fileID: 114445123240300564}
+  - component: {fileID: 114951399669233772}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -146,7 +147,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1900434903470442}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.92, z: -482.25}
+  m_LocalPosition: {x: 35.702484, y: 4.7111797, z: 72.982414}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4591847327963618}
@@ -204,8 +205,8 @@ Camera:
   m_GameObject: {fileID: 1936194932846996}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.42647058, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -364,9 +365,11 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1474379011980548, guid: 12260c8c8f51d324989168aee32664de,
     type: 2}
   graphics: {fileID: 1764523650236648}
-  veinCenter: {x: 0, y: 3}
-  maxDistanceFromVeinCenter: 5
+  veinCenter: {x: 0, y: 0}
+  maxDistanceFromVeinCenter: 9
   playerCamera: {fileID: 1936194932846996}
+  deathEffect: {fileID: 1449274152138522, guid: c9aa96f57c5211f449572c4ecffbc800,
+    type: 2}
 --- !u!114 &114445123240300564
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -399,6 +402,25 @@ MonoBehaviour:
   jitter: 0.05
   showVelocity: 0
   showVelocityScale: 1
+--- !u!114 &114951399669233772
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1936194932846996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4baa4bb754093a45b8689116e7bf5ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceFog: 1
+  excludeFarPixels: 0
+  useRadialDistance: 0
+  heightFog: 1
+  height: 1.75
+  heightDensity: 0.001
+  startDistance: 12.25
+  fogShader: {fileID: 4800000, guid: 70d8568987ac0499f952b54c7c13e265, type: 3}
 --- !u!124 &124612767627025272
 Behaviour:
   m_ObjectHideFlags: 1
