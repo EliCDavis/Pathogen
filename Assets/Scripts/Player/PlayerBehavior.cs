@@ -63,7 +63,7 @@ namespace Pathogen.Player {
 		}
 
 		void InputUpdate() {
-			turn (new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")), veinCenter, maxDistanceFromVeinCenter);
+			turn (new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")), veinCenter, maxDistanceFromVeinCenter);
 
 			if (Input.GetKeyDown (KeyCode.Space)) {
 				Shoot ();
@@ -128,7 +128,7 @@ namespace Pathogen.Player {
 		/// </summary>
 		private void Shoot(){
 			GameObject bullet = Instantiate (bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-			bullet.GetComponent<Rigidbody> ().AddForce (bulletSpawn.transform.forward*30, ForceMode.Impulse);
+			bullet.GetComponent<Rigidbody> ().AddForce (bulletSpawn.transform.forward*50, ForceMode.Impulse);
 		}
 
 		/// <summary>
