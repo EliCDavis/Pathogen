@@ -57,12 +57,19 @@ namespace Pathogen.Scene.Veins {
 			while (currentState != GameState.Ended && playerInstance != null) {
 
 				while(playerInstance.transform.position.z > (veinsSpawned.Count-10) * 27.0f){
-					veinsSpawned.Add(VeinFactory.CreateVein (new Vector3(0, -1, veinsSpawned.Count*27)));
+
+					if (Random.Range (0, 1f) > .8f && veinsSpawned.Count > 10) {
+						veinsSpawned.Add(VeinFactory.CreateVein (new Vector3(0, -1, veinsSpawned.Count*27), Random.Range(-90, 0)));
+					} else {
+						veinsSpawned.Add(VeinFactory.CreateVein (new Vector3(0, -1, veinsSpawned.Count*27)));
+					}
+
 				}
 
 				yield return new WaitForSeconds(.5f);
 
 			}
+		
 		}
 
 
