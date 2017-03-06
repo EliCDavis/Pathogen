@@ -52,7 +52,7 @@ namespace Pathogen.Player {
 
 		// Use this for initialization
 		void Start () {
-			this.playerSpeed = 10f;
+			this.playerSpeed = 30f;
 			this.health = MAX_HEALTH;
 		}
 		
@@ -63,7 +63,7 @@ namespace Pathogen.Player {
 		}
 
 		void InputUpdate() {
-			turn (new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")), veinCenter, maxDistanceFromVeinCenter);
+			turn (new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")), veinCenter, maxDistanceFromVeinCenter);
 
 			if (Input.GetKeyDown (KeyCode.Space)) {
 				Shoot ();
@@ -128,7 +128,7 @@ namespace Pathogen.Player {
 		/// </summary>
 		private void Shoot(){
 			GameObject bullet = Instantiate (bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-			bullet.GetComponent<Rigidbody> ().AddForce (bulletSpawn.transform.forward*30, ForceMode.Impulse);
+			bullet.GetComponent<Rigidbody> ().AddForce (bulletSpawn.transform.forward*50, ForceMode.Impulse);
 		}
 
 		/// <summary>
@@ -150,6 +150,13 @@ namespace Pathogen.Player {
 			Destroy (transform.gameObject);
 		}
 
+		/// <summary>
+		/// Starts a seperate thread for taking care of shaking
+		/// the camera.
+		/// </summary>
+		/// <returns>IEnumerator.</returns>
+		/// <param name="amountOfDamage">Amount of damage.</param>
+		/// <param name="blur">Blur object for animation</param>
 		private IEnumerator AnimateTakingDamage(int amountOfDamage, CameraMotionBlur blur){
 			blur.velocityScale = 34;
 			yield return new WaitForSeconds(.5f);

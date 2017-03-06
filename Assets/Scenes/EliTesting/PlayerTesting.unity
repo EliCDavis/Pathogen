@@ -325,17 +325,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114219036904778794, guid: d36984937fbf51f4b9227fe57ec37d20,
-        type: 2}
-      propertyPath: bulletPrefab
-      value: 
-      objectReference: {fileID: 1474379011980548, guid: 12260c8c8f51d324989168aee32664de,
-        type: 2}
-    - target: {fileID: 114219036904778794, guid: d36984937fbf51f4b9227fe57ec37d20,
-        type: 2}
-      propertyPath: maxDistanceFromVeinCenter
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d36984937fbf51f4b9227fe57ec37d20, type: 2}
   m_IsPrefabParent: 0
