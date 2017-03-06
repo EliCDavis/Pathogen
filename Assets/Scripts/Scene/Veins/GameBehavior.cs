@@ -21,7 +21,7 @@ namespace Pathogen.Scene.Veins {
 		[SerializeField]
 		private AudioSource heartBeatClip;
 
-		private float redCellSpawnPeriod = 0.1f;
+		private float redCellSpawnPeriod = 0.05f;
 
 		private List<GameObject> redCellsInScene;
 
