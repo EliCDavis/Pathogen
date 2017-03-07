@@ -23,8 +23,11 @@ GameObject:
   - component: {fileID: 23374042772832376}
   - component: {fileID: 65247120451871608}
   - component: {fileID: 114227018629545660}
+  - component: {fileID: 54122483918397040}
+  - component: {fileID: 114169697672223404}
+  - component: {fileID: 114901483764913438}
   m_Layer: 0
-  m_Name: cell
+  m_Name: Red Cell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38,7 +41,7 @@ Transform:
   m_GameObject: {fileID: 1871353994517406}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.5008452, y: 0.90999985, z: 7.43927}
-  m_LocalScale: {x: 1, y: 0.32, z: 1}
+  m_LocalScale: {x: 4, y: 1.2, z: 4}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -81,6 +84,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1871353994517406}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &54122483918397040
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1871353994517406}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &65247120451871608
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -93,6 +111,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114169697672223404
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1871353994517406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 268e998919003194a9a935fc6347088c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageDeltOnCollision: 10
+  destroyOnCollision: 1
 --- !u!114 &114227018629545660
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -110,3 +141,18 @@ MonoBehaviour:
   PrimaryRot: 80
   SecondaryRot: 40
   TertiaryRot: 20
+--- !u!114 &114901483764913438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1871353994517406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee9aba162a41c6b43be25d6faa36102b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 5
+  deathEffect: {fileID: 1449274152138522, guid: c9aa96f57c5211f449572c4ecffbc800,
+    type: 2}
+  deathEffectDuration: 0.98
