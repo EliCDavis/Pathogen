@@ -23,6 +23,9 @@ namespace Pathogen.Scene.Veins {
 
 		private float redCellSpawnPeriod = 0.05f;
 
+		[SerializeField]
+		private GameObject pauseMenu;
+
 		private List<GameObject> redCellsInScene;
 
 		List<GameObject> veinsSpawned;
@@ -33,6 +36,16 @@ namespace Pathogen.Scene.Veins {
 			veinsSpawned = new List<GameObject> ();
 			StartGame ();
 			StartCoroutine (AnimateHeartbeat ());
+		}
+
+		void Update(){
+			if(Input.GetKeyUp(KeyCode.P)){
+
+			}
+		}
+
+		public void UnPauseGame(){
+			pauseMenu.SetActive (false);
 		}
 
 		private void StartGame() {
