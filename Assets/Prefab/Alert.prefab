@@ -37,6 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4893020788018374}
   - component: {fileID: 114527845696493980}
+  - component: {fileID: 135783269126712250}
   m_Layer: 0
   m_Name: Alert
   m_TagString: Untagged
@@ -234,3 +235,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f1b29aeb58bb24486ee7b659a4a9df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &135783269126712250
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1283595915730754}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 250
+  m_Center: {x: 0, y: 0, z: 0}

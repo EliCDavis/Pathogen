@@ -12,7 +12,9 @@ public class EnemyController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        spawnAlert();
+        spawnAlert();
+        spawnDestroy();
     }
 
     // Update is called once per frame

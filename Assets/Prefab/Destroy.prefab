@@ -37,6 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4503286744684886}
   - component: {fileID: 114395119915780278}
+  - component: {fileID: 135043478850268272}
   m_Layer: 0
   m_Name: Destroy
   m_TagString: Untagged
@@ -165,3 +166,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38cdbcd0828944c4897698f3d4ea953e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &135043478850268272
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1036902462181752}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
