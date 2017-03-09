@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
     public GameObject alertPrefab;
     public GameObject destroyPrefab;
     public int detected = 0;
+
     private GameObject alertCell;
     private GameObject destroyCell;
     private float coinflip;

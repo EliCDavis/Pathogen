@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathogen.Scene.Brains;
 
 public class Destroy : MonoBehaviour {
     float thisX;
@@ -50,9 +51,11 @@ public class Destroy : MonoBehaviour {
 	}
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        PlayerBehavior target = other.gameObject.GetComponent<PlayerBehavior>();
+        if (target != null)
         {
             //damage player
+            target.Damage(10, Pathogen.Player.DamageType.Destroyer);
             Destroy(this.gameObject);
         }
 

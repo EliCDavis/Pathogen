@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathogen.Scene.Brains;
 
 public class Alert : MonoBehaviour{
 
@@ -18,7 +19,8 @@ public class Alert : MonoBehaviour{
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        PlayerBehavior target = other.gameObject.GetComponent<PlayerBehavior>();
+        if (target != null)
         {
             controllerReference.spawnDestroy();
             controllerReference.lastKnown = other.transform.position;
@@ -29,7 +31,8 @@ public class Alert : MonoBehaviour{
 
     void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player")
+        PlayerBehavior target = other.gameObject.GetComponent<PlayerBehavior>();
+        if (target != null)
         {
             controllerReference.lastKnown = other.transform.position;
         }
