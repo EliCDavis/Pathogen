@@ -9,11 +9,14 @@ namespace Pathogen.Scene.Brains {
 
 	public class PlayerBehavior : MonoBehaviour {
 
-		private float speed = 7.5f;
+		private float speed = 10f;
 
 		private float rotateSpeed = 90f;
 
 		private float maxVelocityChange = 10.0f;
+
+		[SerializeField]
+		private AudioSource painSound;
 
 		[SerializeField]
 		/// <summary>
@@ -84,6 +87,9 @@ namespace Pathogen.Scene.Brains {
 		public void Damage(int damage, DamageType typeOfDamage){
 
 			health = Mathf.Max (health - Mathf.Abs(damage), 0);
+
+			painSound.Play ();
+
 			if (health == 0) {
 
 				string deathMessage;
