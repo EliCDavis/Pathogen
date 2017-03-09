@@ -23,7 +23,8 @@ namespace Pathogen.Scene.Veins {
 			topScore = 0;
 			veinsStagedScore = 0;
 			brainStagedScore = 0;
-		}
+            topScore = PlayerPrefs.GetInt("High Score");
+        }
 
 		public void ClearStagedScores() {
 			veinsStagedScore = 0;
@@ -60,7 +61,9 @@ namespace Pathogen.Scene.Veins {
 
 		private void CommitScore() {
 			topScore = Mathf.Max (topScore, GetStagedScore());
-		}
+            PlayerPrefs.SetInt("High Score", topScore);
+            PlayerPrefs.Save();
+        }
 	
 	}
 
