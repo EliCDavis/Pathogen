@@ -35,6 +35,11 @@ namespace Pathogen.Scene.Veins {
 
 		}
 
+        public int getHealth()
+        {
+            return currentHealth;
+        }
+
 	}
 
 }
