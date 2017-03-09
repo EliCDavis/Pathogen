@@ -8,6 +8,12 @@ public class EnemyController : MonoBehaviour
     public GameObject alertPrefab;
     public GameObject destroyPrefab;
     public int detected = 0;
+    private GameObject alertCell;
+    private GameObject destroyCell;
+    private float coinflip;
+    private float spawnX;
+    private float spawnY;
+    private float spawnZ;
 
     // Use this for initialization
     void Start()
@@ -24,11 +30,42 @@ public class EnemyController : MonoBehaviour
     }
     public void spawnAlert()
     {
-        GameObject.Instantiate(alertPrefab, this.transform);
+
+        alertCell = GameObject.Instantiate(alertPrefab);
+        alertCell.transform.position = generateSpawnPosition();
     }
 
     public void spawnDestroy()
     {
-        GameObject.Instantiate(destroyPrefab, this.transform);
+
+        destroyCell = GameObject.Instantiate(destroyPrefab);
+        destroyCell.transform.position = generateSpawnPosition();
+    }
+    private Vector3 generateSpawnPosition()
+    {
+        spawnX = Random.Range(-1000f, 1000f);
+        
+        spawnZ = Random.Range(-1000f, 1000f);
+        if (spawnX > -415 && spawnX < 525 && spawnZ < 825 && spawnZ > -500)
+        {
+            coinflip = Random.Range(1f, 10f);
+            if (coinflip % 2 == 0)
+            {
+                spawnY = Random.Range(5f, 100f);
+            }
+
+            else
+            {
+                spawnY = Random.Range(860f, 1000f);
+            }
+
+        }
+
+        else
+        {
+            spawnY = Random.Range(5f, 1000f);
+        }
+
+        return new Vector3(spawnX, spawnY, spawnZ);
     }
 }

@@ -8,19 +8,10 @@ public class Destroy : MonoBehaviour {
     float thisZ;
     float speed = 0.15f;
     EnemyController controllerReference;
-    float spawnX;
-    float spawnY;
-    float spawnZ;
-    //PlayerBehavior playerReference;
     
 	// Use this for initialization
 	void Start () {
         controllerReference = GameObject.Find("EnemyController").GetComponent<EnemyController>();
-        //playerReference = GameObject.Find("PlayerBehavior").GetComponent<PlayerBehavior>();
-        spawnX = Random.Range(-1500f, 1500f);
-        spawnY = Random.Range(5f, 1000f);
-        spawnZ = Random.Range(-1500f, 1500f);
-        this.transform.position = new Vector3(spawnX, spawnY, spawnZ);
     }
 	
 	// Update is called once per frame
@@ -62,10 +53,6 @@ public class Destroy : MonoBehaviour {
         if(other.tag == "Player")
         {
             //damage player
-            Destroy(this.gameObject);
-        }
-        if(other.gameObject.name == "Bullet")
-        {
             Destroy(this.gameObject);
         }
 

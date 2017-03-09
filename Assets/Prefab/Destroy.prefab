@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4503286744684886}
   - component: {fileID: 114395119915780278}
   - component: {fileID: 135043478850268272}
+  - component: {fileID: 114436726146555210}
   m_Layer: 0
   m_Name: Destroy
   m_TagString: Untagged
@@ -166,6 +167,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38cdbcd0828944c4897698f3d4ea953e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114436726146555210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1036902462181752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee9aba162a41c6b43be25d6faa36102b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 0
+  deathEffect: {fileID: 0}
+  deathEffectDuration: 0
 --- !u!135 &135043478850268272
 SphereCollider:
   m_ObjectHideFlags: 1
