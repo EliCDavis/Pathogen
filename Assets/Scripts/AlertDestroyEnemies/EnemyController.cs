@@ -12,6 +12,9 @@ public class EnemyController : MonoBehaviour
 	[SerializeField]
 	private GameObject player;
 
+	[SerializeField]
+	private GameObject playerMarker;
+
     private GameObject alertCell;
     private GameObject destroyCell;
     private float coinflip;
@@ -22,12 +25,12 @@ public class EnemyController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        for(int i=0; i < 30; i++)
+        for(int i=0; i < 15; i++)
         {
             spawnAlert();
         }
 
-        for(int i=0; i < 15; i++)
+        for(int i=0; i < 30; i++)
         {
             spawnDestroy();
         }
@@ -40,7 +43,7 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+		playerMarker.transform.position = lastKnown;
     }
     public void spawnAlert()
     {
