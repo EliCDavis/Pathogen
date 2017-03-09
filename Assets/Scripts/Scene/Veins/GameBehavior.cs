@@ -25,6 +25,19 @@ namespace Pathogen.Scene.Veins {
 
 		private float redCellSpawnPeriod = 0.05f;
 
+		/// <summary>
+		/// How much time the game has progressed
+		/// </summary>
+		private float timeElapsed = 0f;
+
+		private float timeNeededToComplete = 60f;
+
+		[SerializeField]
+		private GameObject winMenu;
+
+		[SerializeField]
+		private Text highschore;
+
 		[SerializeField]
 		private GameObject pauseMenu;
 
@@ -56,6 +69,15 @@ namespace Pathogen.Scene.Veins {
 			if(Input.GetKeyUp (KeyCode.P) && CanTogglePause()){
 				TogglePause ();
 			}
+
+			if(currentState == GameState.Started && !CurrentlyPaused()){
+				timeElapsed += Time.deltaTime;
+				Debug.Log (timeElapsed);
+			}
+
+			if(currentState == GameState.Started && timeElapsed >= timeNeededToComplete){
+				PlayerWins ();
+			}
 		}
 
 		/// <summary>
@@ -64,6 +86,14 @@ namespace Pathogen.Scene.Veins {
 		/// <returns><c>true</c> if this instance can toggle pause; otherwise, <c>false</c>.</returns>
 		private bool CanTogglePause(){
 			return currentState == GameState.Paused || currentState == GameState.Started;
+		}
+
+		private void PlayerWins() {
+			currentState = GameState.Ended;
+			playerInstance.GetComponent<PlayerBehavior>().DetachCamera ();
+			Destroy (playerInstance);
+			highschore.text = "Score: " + ScoreManager.GetInstance ().GetVeinsStagedScore ();
+			winMenu.SetActive (true);
 		}
 
 		/// <summary>
@@ -89,6 +119,8 @@ namespace Pathogen.Scene.Veins {
 			currentState = GameState.Started;
 			StartCoroutine (SpawnBloodCells());
 			howTo.SetActive (false);
+			ScoreManager.GetInstance ().ClearStagedScores ();
+			timeElapsed = 0;
 		}
 
 		public void PlayerDied(string reason){
@@ -108,6 +140,7 @@ namespace Pathogen.Scene.Veins {
 			pauseMenu.SetActive (false);
 			deathMenu.SetActive (false);
 			howTo.SetActive (false);
+			winMenu.SetActive (false);
 		}
 
 

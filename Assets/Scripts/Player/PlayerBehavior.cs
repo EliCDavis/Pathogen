@@ -176,8 +176,7 @@ namespace Pathogen.Player {
 		/// </summary>
 		/// <param name="reason">Reason the player died.</param>
 		private void Die(string reason){
-			playerCamera.transform.parent = null;
-			Destroy (playerCamera.GetComponent<ProtectCameraFromWallClip> ());
+			DetachCamera ();
 			GameObject deathEffectInstance = Instantiate (deathEffect, graphics.transform.position, Quaternion.identity);
 			gameBehavior.PlayerDied (reason);
 			Destroy (deathEffectInstance, .95f);
@@ -195,6 +194,11 @@ namespace Pathogen.Player {
 			blur.velocityScale = 34;
 			yield return new WaitForSeconds(.5f);
 			blur.velocityScale = 0;
+		}
+
+		public void DetachCamera() {
+			playerCamera.transform.parent = null;
+			Destroy (playerCamera.GetComponent<ProtectCameraFromWallClip> ());
 		}
 
 	}
