@@ -31,6 +31,7 @@ public class BrainPart : MonoBehaviour {
 
 		if(lastHealth != healthReference.getHealth()){
 			lastHealth = healthReference.getHealth ();
+			enemyReference.BrainPartHit ();
 			DamageAnimation ();
 		}
 

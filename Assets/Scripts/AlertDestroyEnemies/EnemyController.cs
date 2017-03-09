@@ -9,6 +9,9 @@ public class EnemyController : MonoBehaviour
     public GameObject destroyPrefab;
     public int detected = 0;
 
+	[SerializeField]
+	private GameObject player;
+
     private GameObject alertCell;
     private GameObject destroyCell;
     private float coinflip;
@@ -19,16 +22,20 @@ public class EnemyController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        for(int i=0; i < 10; i++)
+        for(int i=0; i < 30; i++)
         {
             spawnAlert();
         }
 
-        for(int i=0; i < 3; i++)
+        for(int i=0; i < 15; i++)
         {
             spawnDestroy();
         }
     }
+
+	public void BrainPartHit(){
+		lastKnown = player.transform.position;
+	}
 
     // Update is called once per frame
     void Update()

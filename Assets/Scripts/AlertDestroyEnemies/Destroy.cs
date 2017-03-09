@@ -5,7 +5,7 @@ using Pathogen.Scene.Brains;
 
 public class Destroy : MonoBehaviour {
   
-    float speed = 13f;
+    float speed = 100f;
     EnemyController controllerReference;
     
 	// Use this for initialization
@@ -17,7 +17,7 @@ public class Destroy : MonoBehaviour {
 	void Update () {
         if (controllerReference.detected == 1)
         {
-			Vector3 movementDirection = (controllerReference.lastKnown - transform.position);
+			Vector3 movementDirection = (controllerReference.lastKnown - transform.position).normalized;
 
 			if (movementDirection.x != movementDirection.x || float.IsInfinity(movementDirection.x)) {
 				return;
