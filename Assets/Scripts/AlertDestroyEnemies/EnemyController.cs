@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class EnemyController : MonoBehaviour
 {
@@ -15,6 +17,21 @@ public class EnemyController : MonoBehaviour
 	[SerializeField]
 	private GameObject playerMarker;
 
+	[SerializeField]
+	private GameObject congrats;
+
+	[SerializeField]
+	private Text score;
+
+	[SerializeField]
+	private GameObject deathScreen;
+
+	[SerializeField]
+	private Text deathReason;
+
+	[SerializeField]
+	private GameObject pauseScreen;
+
     private GameObject alertCell;
     private GameObject destroyCell;
     private float coinflip;
@@ -25,7 +42,7 @@ public class EnemyController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        for(int i=0; i < 15; i++)
+        for(int i=0; i < 25; i++)
         {
             spawnAlert();
         }
@@ -51,6 +68,28 @@ public class EnemyController : MonoBehaviour
         alertCell = GameObject.Instantiate(alertPrefab);
         alertCell.transform.position = generateSpawnPosition();
     }
+
+	public void GoToEnd() {
+		SceneManager.LoadScene(3);
+	}
+
+	public void ReloadLevel() {
+		SceneManager.LoadScene (2);
+	}
+
+	public void MainMenu() {
+		SceneManager.LoadScene (1);
+	}
+
+	private void CloseAllScreens() {
+		deathScreen.SetActive (false);
+		congrats.SetActive (false);
+	}
+
+	public void OpenDeathScreen(string reason) {
+		deathScreen.SetActive (true);
+		deathReason.text = reason;
+	}
 
     public void spawnDestroy()
     {

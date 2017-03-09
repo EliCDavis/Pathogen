@@ -19,6 +19,9 @@ namespace Pathogen.Scene.Brains {
 		private AudioSource painSound;
 
 		[SerializeField]
+		private EnemyController controller;
+
+		[SerializeField]
 		/// <summary>
 		/// The location the bullet will spawn out of.
 		/// </summary>
@@ -100,6 +103,10 @@ namespace Pathogen.Scene.Brains {
 					deathMessage = "Stop running into things!";
 					break;
 
+				case DamageType.Destroyer:
+					deathMessage = "You got taken down by the cells!";
+					break;
+
 				default:
 					deathMessage = "You took too much damage!";
 					break;
@@ -133,6 +140,8 @@ namespace Pathogen.Scene.Brains {
 		/// </summary>
 		/// <param name="reason">Reason the player died.</param>
 		private void Die(string reason){
+			controller.OpenDeathScreen (reason);
+
 			playerCamera.transform.parent = null;
 			Destroy (playerCamera.GetComponent<ProtectCameraFromWallClip> ());
 			GameObject deathEffectInstance = Instantiate (deathEffect, graphics.transform.position, Quaternion.identity);
