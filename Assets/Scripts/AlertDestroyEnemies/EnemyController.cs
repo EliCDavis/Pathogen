@@ -76,7 +76,33 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
 		playerMarker.transform.position = lastKnown;
+		if(Input.GetKeyUp (KeyCode.P) && CanTogglePause()){
+			TogglePause ();
+		}
     }
+
+	private bool CanTogglePause(){
+		return hud.activeSelf;
+	}
+
+	/// <summary>
+	/// Opens and closes the pause menu as well as
+	/// </summary>
+	private void TogglePause() {
+		if (CurrentlyPaused()) {
+			pauseScreen.SetActive (false);
+			Time.timeScale = 1;
+		} else {
+			pauseScreen.SetActive (true);
+			Time.timeScale = 0;
+		}
+	}
+
+	// Whether or not we're currently paused
+	private bool CurrentlyPaused() {
+		return pauseScreen.activeSelf;
+	}
+
     public void spawnAlert()
     {
         alertCell = GameObject.Instantiate(alertPrefab);
