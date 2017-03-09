@@ -45,7 +45,7 @@ namespace Pathogen.Scene.Brains {
 		/// </summary>
 		private GameObject deathEffect;
 
-		private int health;
+		private int health = 100;
 
 		private Rigidbody rb;
 

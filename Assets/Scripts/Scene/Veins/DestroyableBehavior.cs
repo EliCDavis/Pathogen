@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Pathogen.Player;
 
 namespace Pathogen.Scene.Veins {
 
@@ -24,6 +25,8 @@ namespace Pathogen.Scene.Veins {
 			// Die
 			if (currentHealth <= 0) {
 
+				ScoreManager.GetInstance ().AddToVeinsScore (points);
+
 				if (deathEffect != null && deathEffectDuration > 0) {
 					GameObject effect = Instantiate (deathEffect, transform.position, deathEffect.transform.rotation);
 					Destroy (effect, deathEffectDuration);
@@ -34,6 +37,13 @@ namespace Pathogen.Scene.Veins {
 			}
 
 		}
+
+        public int getHealth()
+        {
+            return currentHealth;
+        }
+		[SerializeField]
+		private int points = 100;
 
 	}
 
