@@ -7,7 +7,7 @@ public class Destroy : MonoBehaviour {
     float thisX;
     float thisY;
     float thisZ;
-    float speed = 7.5f;
+    float speed = 2f;
     EnemyController controllerReference;
     
 	// Use this for initialization
