@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Pathogen.Player;
 
 namespace Pathogen.Scene.Veins {
 
@@ -25,6 +27,12 @@ namespace Pathogen.Scene.Veins {
 
 		[SerializeField]
 		private GameObject pauseMenu;
+
+		[SerializeField]
+		private GameObject deathMenu;
+
+		[SerializeField]
+		private Text deathText;
 
 		private List<GameObject> redCellsInScene;
 
@@ -80,12 +88,22 @@ namespace Pathogen.Scene.Veins {
 			StartCoroutine (SpawnBloodCells());
 		}
 
+		public void PlayerDied(string reason){
+			currentState = GameState.Ended;
+			CloseAllMenus ();
+			deathMenu.SetActive (true);
+			deathText.text = reason;
+		}
+
 		private GameObject LoadPlayer() {
-			return Instantiate(Resources.Load <GameObject>("Rails/Player"), Vector3.zero, Quaternion.identity);
+			GameObject player = Instantiate(Resources.Load <GameObject>("Rails/Player"), Vector3.zero, Quaternion.identity);
+			player.GetComponent<PlayerBehavior> ().SetGameBehavior(this);
+			return player;
 		}
 
 		private void CloseAllMenus() {
 			pauseMenu.SetActive (false);
+			deathMenu.SetActive (false);
 		}
 
 

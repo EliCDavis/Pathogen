@@ -1,17 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathogen.Player;
 using UnityStandardAssets.ImageEffects;
 using UnityStandardAssets.Cameras;
-using Pathogen.Scene.Veins;
 
-namespace Pathogen.Player {
+namespace Pathogen.Scene.Brains {
 
 	public class PlayerBehavior : MonoBehaviour {
 
-		private float playerSpeed;
+		private float speed = 7.5f;
 
-		static readonly int MAX_HEALTH = 100;
+		private float rotateSpeed = 90f;
+
+		private float maxVelocityChange = 10.0f;
 
 		[SerializeField]
 		/// <summary>
@@ -31,24 +33,11 @@ namespace Pathogen.Player {
 		/// </summary>
 		private GameObject graphics;
 
-		private int health;
-
-		[SerializeField]
-		private Vector2 veinCenter;
-
-		[SerializeField]
-		private float maxDistanceFromVeinCenter;
-
 		[SerializeField]
 		/// <summary>
 		/// The camera that is following the player
 		/// </summary>
 		private GameObject playerCamera;
-
-		/// <summary>
-		/// Reference to the game behavior in the scene
-		/// </summary>
-		private GameBehavior gameBehavior; 
 
 		[SerializeField]
 		/// <summary>
@@ -56,51 +45,35 @@ namespace Pathogen.Player {
 		/// </summary>
 		private GameObject deathEffect;
 
-		// Use this for initialization
-		void Start () {
-			this.playerSpeed = 30f;
-			this.health = MAX_HEALTH;
-		}
-		
-		// Update is called once per frame
-		void Update () {
-			transform.Translate (Vector3.forward * playerSpeed * Time.deltaTime);
-			InputUpdate ();
+		private int health;
+
+		private Rigidbody rb;
+
+		void Start() {
+			rb = gameObject.GetComponent<Rigidbody> ();
 		}
 
-		void InputUpdate() {
-			turn (new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")), veinCenter, maxDistanceFromVeinCenter);
+		void Update() {
+
+			// Calculate how fast we should be moving
+			Vector3 targetVelocity = new Vector3(0, Input.GetAxis("Vertical")*speed*.75f, speed);
+			targetVelocity = transform.TransformDirection(targetVelocity);
+			targetVelocity *= speed;
+
+			// Apply a force that attempts to reach our target velocity
+			Vector3 velocity = rb.velocity;
+			Vector3 velocityChange = (targetVelocity - velocity);
+			velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
+			velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
+			rb.AddForce(velocityChange, ForceMode.VelocityChange);
+
+			// Rotate appropriatly
+			var desiredRotQ = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y + Input.GetAxis("Horizontal")*Time.deltaTime*rotateSpeed, transform.eulerAngles.z);
+			transform.rotation = Quaternion.Lerp(transform.rotation, desiredRotQ, Time.deltaTime * rotateSpeed);
 
 			if (Input.GetKeyDown (KeyCode.Space)) {
 				Shoot ();
 			}
-		}
-
-		public void SetGameBehavior(GameBehavior game){
-			this.gameBehavior = game;
-		}
-
-		/// <summary>
-		/// Pivots the player towards the direction.
-		/// Vector <1,1>: turns player towards top left of screen
-		/// </summary>
-		/// <param name="direction">Normalized Direction</param>
-		/// <param name="tubeCenter">Center of the tube the player is moving through.</param>
-		/// <param name="maxOffsetFromCenter">Center of the tube the player is moving through.</param>
-		void turn (Vector2 direction, Vector2 tubeCenter, float maxOffsetFromCenter) {
-
-			// Move the player in the proper direction while maintaining proper bounds..
-			transform.Translate (new Vector3 (direction.x, direction.y).normalized * Time.deltaTime * playerSpeed);
-
-			float distFromCenter = Vector2.Distance (new Vector2(transform.position.x, transform.position.y), tubeCenter);
-			if (distFromCenter > maxOffsetFromCenter) {
-				transform.position = transform.position - ((new Vector3(transform.position.x, transform.position.y, 0) - new Vector3 (tubeCenter.x, tubeCenter.y, 0)).normalized * (distFromCenter-maxOffsetFromCenter));
-			}
-			// Rotate properly to look in the direction we're flying..
-			Vector3 lookDirection = transform.forward*2;
-			lookDirection += transform.right * direction.x * 2;
-			lookDirection += transform.up * direction.y * 2;
-			graphics.transform.LookAt (lookDirection + graphics.transform.position);
 
 		}
 
@@ -137,8 +110,9 @@ namespace Pathogen.Player {
 		/// Player shoots a 'bullet' in the direction it's facing
 		/// </summary>
 		private void Shoot(){
-			GameObject bullet = Instantiate (bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-			bullet.GetComponent<Rigidbody> ().AddForce (bulletSpawn.transform.forward*50, ForceMode.Impulse);
+			GameObject bullet = Instantiate (bulletPrefab, bulletSpawn.position, graphics.transform.rotation);
+			bullet.GetComponent<Rigidbody> ().velocity = rb.velocity;
+			bullet.GetComponent<Rigidbody> ().AddForce (graphics.transform.forward*50, ForceMode.Impulse);
 		}
 
 		/// <summary>
@@ -156,7 +130,6 @@ namespace Pathogen.Player {
 			playerCamera.transform.parent = null;
 			Destroy (playerCamera.GetComponent<ProtectCameraFromWallClip> ());
 			GameObject deathEffectInstance = Instantiate (deathEffect, graphics.transform.position, Quaternion.identity);
-			gameBehavior.PlayerDied (reason);
 			Destroy (deathEffectInstance, .95f);
 			Destroy (transform.gameObject);
 		}
