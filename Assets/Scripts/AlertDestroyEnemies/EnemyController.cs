@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Pathogen.Scene.Veins;
+using Pathogen.Scene.Brains;
 
 public class EnemyController : MonoBehaviour
 {
@@ -44,6 +46,9 @@ public class EnemyController : MonoBehaviour
 	[SerializeField]
 	private GameObject howToPlay;
 
+	[SerializeField]
+	private GameObject[] brainParts;
+
     private GameObject alertCell;
     private GameObject destroyCell;
     private float coinflip;
@@ -78,6 +83,17 @@ public class EnemyController : MonoBehaviour
 		playerMarker.transform.position = lastKnown;
 		if(Input.GetKeyUp (KeyCode.P) && CanTogglePause()){
 			TogglePause ();
+		}
+		hudScore.text = "" + ScoreManager.GetInstance ().GetStagedScore ();
+		hudHealth.value = player.GetComponent<PlayerBehavior> ().GetHealth ()/100f;
+
+		if (hud.activeSelf) {
+			for (int i = 0; i < brainParts.Length; i++) {
+				if (brainParts [i] != null) {
+					return;
+				}
+			}
+			GoToEnd ();
 		}
     }
 
@@ -122,6 +138,7 @@ public class EnemyController : MonoBehaviour
 	}
 
 	public void StartGame() {
+		player.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 		Time.timeScale = 1;
 		CloseAllScreens ();
 		hud.SetActive (true);

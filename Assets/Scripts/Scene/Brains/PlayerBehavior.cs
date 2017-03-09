@@ -58,8 +58,13 @@ namespace Pathogen.Scene.Brains {
 		void Start() {
 			rb = gameObject.GetComponent<Rigidbody> ();
 		}
+			
 
 		void Update() {
+
+			if (Time.timeScale == 0) {
+				return;
+			}
 
 			// Calculate how fast we should be moving
 			Vector3 targetVelocity = new Vector3(0, Input.GetAxis("Vertical")*speed*.75f, speed);
@@ -162,6 +167,10 @@ namespace Pathogen.Scene.Brains {
 			blur.velocityScale = 0;
 		}
 
+
+		public int GetHealth(){
+			return this.health;
+		}
 	}
 
 }

@@ -6,6 +6,10 @@ using Pathogen.Scene.Brains;
 public class BrainPart : MonoBehaviour {
     public Pathogen.Scene.Veins.DestroyableBehavior healthReference;
     public EnemyController enemyReference;
+
+	[SerializeField]
+	public AudioSource soundEffect;
+
     int spawn;
 	// Use this for initialization
 	void Start () {
@@ -18,6 +22,8 @@ public class BrainPart : MonoBehaviour {
 	private void DamageAnimation() {
 		transform.localScale = transform.localScale * .98f;
 		StartCoroutine (AnimateTakingDamage());
+		soundEffect.Play ();
+
 	}
 
 	private IEnumerator AnimateTakingDamage(){

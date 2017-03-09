@@ -299,7 +299,7 @@ MonoBehaviour:
   deathEffect: {fileID: 1449274152138522, guid: c9aa96f57c5211f449572c4ecffbc800,
     type: 2}
   deathEffectDuration: 1
-  points: 100
+  points: 500
 --- !u!135 &135770443900758964
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -935,11 +935,11 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
       minMaxState: 0
-    cnt0: 400
+    cnt0: 200
     cnt1: 30
     cnt2: 30
     cnt3: 30
-    cntmax0: 400
+    cntmax0: 200
     cntmax1: 30
     cntmax2: 30
     cntmax3: 30
