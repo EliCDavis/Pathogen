@@ -69,6 +69,10 @@ namespace Pathogen.Player {
 			MonitorInputToBeginGame ();
 		}
 
+		public int GetHealth(){
+			return this.health;
+		}
+
 		void InputUpdate() {
 			turn (new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")), veinCenter, maxDistanceFromVeinCenter);
 

@@ -48,7 +48,19 @@ namespace Pathogen.Scene.Veins {
 		private GameObject howTo;
 
 		[SerializeField]
+		private GameObject hud;
+
+		[SerializeField]
+		private Slider health;
+
+		[SerializeField]
+		private Slider progress;
+
+		[SerializeField]
 		private Text deathText;
+
+		[SerializeField]
+		private Text hudScore;
 
 		private List<GameObject> redCellsInScene;
 
@@ -61,6 +73,7 @@ namespace Pathogen.Scene.Veins {
 			StartCoroutine (AnimateHeartbeat ());
 			CloseAllMenus ();
 			howTo.SetActive (true);
+			hud.SetActive (true);
 			playerInstance = LoadPlayer ();
 			StartCoroutine (SpawnVeinSections ());
 		}
@@ -72,7 +85,9 @@ namespace Pathogen.Scene.Veins {
 
 			if(currentState == GameState.Started && !CurrentlyPaused()){
 				timeElapsed += Time.deltaTime;
-				Debug.Log (timeElapsed);
+				progress.value = timeElapsed / timeNeededToComplete;
+				health.value = playerInstance.GetComponent<PlayerBehavior>().GetHealth () / 100f;
+				hudScore.text = ""+ScoreManager.GetInstance ().GetStagedScore ();
 			}
 
 			if(currentState == GameState.Started && timeElapsed >= timeNeededToComplete){
@@ -91,6 +106,7 @@ namespace Pathogen.Scene.Veins {
 		private void PlayerWins() {
 			currentState = GameState.Ended;
 			playerInstance.GetComponent<PlayerBehavior>().DetachCamera ();
+			CloseAllMenus ();
 			Destroy (playerInstance);
 			highschore.text = "Score: " + ScoreManager.GetInstance ().GetVeinsStagedScore ();
 			winMenu.SetActive (true);
@@ -141,6 +157,7 @@ namespace Pathogen.Scene.Veins {
 			deathMenu.SetActive (false);
 			howTo.SetActive (false);
 			winMenu.SetActive (false);
+			hud.SetActive (false);
 		}
 
 
