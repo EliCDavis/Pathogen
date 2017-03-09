@@ -21,7 +21,7 @@ public class EnemyController : MonoBehaviour
 	private GameObject congrats;
 
 	[SerializeField]
-	private Text score;
+	private Text congratsScore;
 
 	[SerializeField]
 	private GameObject deathScreen;
@@ -31,6 +31,18 @@ public class EnemyController : MonoBehaviour
 
 	[SerializeField]
 	private GameObject pauseScreen;
+
+	[SerializeField]
+	private GameObject hud;
+
+	[SerializeField]
+	private Slider hudHealth;
+
+	[SerializeField]
+	private Text hudScore;
+
+	[SerializeField]
+	private GameObject howToPlay;
 
     private GameObject alertCell;
     private GameObject destroyCell;
@@ -51,6 +63,9 @@ public class EnemyController : MonoBehaviour
         {
             spawnDestroy();
         }
+		CloseAllScreens ();
+		Time.timeScale = 0;
+		howToPlay.SetActive (true);
     }
 
 	public void BrainPartHit(){
@@ -64,7 +79,6 @@ public class EnemyController : MonoBehaviour
     }
     public void spawnAlert()
     {
-
         alertCell = GameObject.Instantiate(alertPrefab);
         alertCell.transform.position = generateSpawnPosition();
     }
@@ -81,12 +95,21 @@ public class EnemyController : MonoBehaviour
 		SceneManager.LoadScene (1);
 	}
 
+	public void StartGame() {
+		Time.timeScale = 1;
+		CloseAllScreens ();
+		hud.SetActive (true);
+	}
+
 	private void CloseAllScreens() {
 		deathScreen.SetActive (false);
 		congrats.SetActive (false);
+		hud.SetActive (false);
+		howToPlay.SetActive (false);
 	}
 
 	public void OpenDeathScreen(string reason) {
+		CloseAllScreens ();
 		deathScreen.SetActive (true);
 		deathReason.text = reason;
 	}
