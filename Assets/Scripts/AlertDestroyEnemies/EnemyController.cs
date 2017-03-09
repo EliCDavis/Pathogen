@@ -19,9 +19,15 @@ public class EnemyController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        spawnAlert();
-        spawnAlert();
-        spawnDestroy();
+        for(int i=0; i < 10; i++)
+        {
+            spawnAlert();
+        }
+
+        for(int i=0; i < 3; i++)
+        {
+            spawnDestroy();
+        }
     }
 
     // Update is called once per frame

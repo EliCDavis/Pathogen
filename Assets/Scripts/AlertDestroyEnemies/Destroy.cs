@@ -7,7 +7,7 @@ public class Destroy : MonoBehaviour {
     float thisX;
     float thisY;
     float thisZ;
-    float speed = 0.15f;
+    float speed = 5f;
     EnemyController controllerReference;
     
 	// Use this for initialization
@@ -19,33 +19,8 @@ public class Destroy : MonoBehaviour {
 	void Update () {
         if (controllerReference.detected == 1)
         {
+            this.transform.Translate((controllerReference.lastKnown - this.transform.position) * speed * Time.deltaTime);
 
-
-            if (this.transform.position.x - controllerReference.lastKnown.x < 0f)
-            {
-                thisX = this.transform.position.x + speed;
-            }
-            if (this.transform.position.x - controllerReference.lastKnown.x > 0f)
-            {
-                thisX = this.transform.position.x - speed;
-            }
-            if (this.transform.position.y - controllerReference.lastKnown.y < 0f)
-            {
-                thisY = this.transform.position.y + speed;
-            }
-            if (this.transform.position.y - controllerReference.lastKnown.y > 0f)
-            {
-                thisY = this.transform.position.y - speed;
-            }
-            if (this.transform.position.z - controllerReference.lastKnown.z < 0f)
-            {
-                thisZ = this.transform.position.z + speed;
-            }
-            if (this.transform.position.z - controllerReference.lastKnown.z > 0f)
-            {
-                thisZ = this.transform.position.z - speed;
-            }
-            this.transform.position = new Vector3(thisX, thisY, thisZ);
         }
 		//move toward last konwn player position
 	}

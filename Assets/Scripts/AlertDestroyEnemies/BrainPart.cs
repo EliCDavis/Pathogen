@@ -21,9 +21,10 @@ public class BrainPart : MonoBehaviour {
         }
         if (healthReference.getHealth() == 400 && spawn == 0)
         {
-            enemyReference.spawnAlert();
-            enemyReference.spawnAlert();
-            enemyReference.spawnAlert();
+            for(int i = 0; i < 4; i++)
+            {
+                enemyReference.spawnAlert();
+            }
             spawn = 1;
         }
         if (healthReference.getHealth() < 300 && healthReference.getHealth() > 200)
@@ -32,9 +33,10 @@ public class BrainPart : MonoBehaviour {
         }
         if (healthReference.getHealth() == 300 && spawn == 0)
         {
-            enemyReference.spawnAlert();
-            enemyReference.spawnAlert();
-            enemyReference.spawnAlert();
+            for (int i = 0; i < 4; i++)
+            {
+                enemyReference.spawnAlert();
+            }
             spawn = 1;
         }
         if (healthReference.getHealth() < 200 && healthReference.getHealth() > 100)
@@ -43,16 +45,18 @@ public class BrainPart : MonoBehaviour {
         }
         if (healthReference.getHealth() == 200 && spawn == 0)
         {
-            enemyReference.spawnAlert();
-            enemyReference.spawnAlert();
-            enemyReference.spawnAlert();
+            for (int i = 0; i < 4; i++)
+            {
+                enemyReference.spawnAlert();
+            }
             spawn = 1;
         }
         if (healthReference.getHealth() == 100 && spawn == 0)
         {
-            enemyReference.spawnAlert();
-            enemyReference.spawnAlert();
-            enemyReference.spawnAlert();
+            for (int i = 0; i < 4; i++)
+            {
+                enemyReference.spawnAlert();
+            }
             spawn = 1;
         }
     }

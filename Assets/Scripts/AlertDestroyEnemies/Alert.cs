@@ -6,6 +6,7 @@ using Pathogen.Scene.Brains;
 public class Alert : MonoBehaviour{
 
     EnemyController controllerReference;
+    GameObject graphics;
 
 	// Use this for initialization
 	void Start () {
@@ -23,7 +24,7 @@ public class Alert : MonoBehaviour{
         if (target != null)
         {
             controllerReference.spawnDestroy();
-            controllerReference.lastKnown = other.transform.position;
+            controllerReference.lastKnown = target.transform.FindChild("Graphics").position;
             controllerReference.detected = 1;
         }
 
@@ -34,7 +35,7 @@ public class Alert : MonoBehaviour{
         PlayerBehavior target = other.gameObject.GetComponent<PlayerBehavior>();
         if (target != null)
         {
-            controllerReference.lastKnown = other.transform.position;
+            controllerReference.lastKnown = target.transform.FindChild("Graphics").position;
         }
     }
 }
