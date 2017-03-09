@@ -190,7 +190,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1238115890092900}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 9.42, z: -510.53}
+  m_LocalPosition: {x: 0, y: 500, z: -900}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4015416349039774}
@@ -215,7 +215,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 100000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -383,6 +383,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1474379011980548, guid: 12260c8c8f51d324989168aee32664de,
     type: 2}
   graphics: {fileID: 1597774853900010}
+  playerCamera: {fileID: 1832425836958726}
+  deathEffect: {fileID: 1449274152138522, guid: c9aa96f57c5211f449572c4ecffbc800,
+    type: 2}
 --- !u!114 &114517434007177644
 MonoBehaviour:
   m_ObjectHideFlags: 1

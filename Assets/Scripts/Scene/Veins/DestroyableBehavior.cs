@@ -38,6 +38,10 @@ namespace Pathogen.Scene.Veins {
 
 		}
 
+        public int getHealth()
+        {
+            return currentHealth;
+        }
 		[SerializeField]
 		private int points = 100;
 
