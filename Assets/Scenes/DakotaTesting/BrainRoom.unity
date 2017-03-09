@@ -167,6 +167,7 @@ MonoBehaviour:
   currentHealth: 500
   deathEffect: {fileID: 0}
   deathEffectDuration: 0
+  points: 100
 --- !u!114 &75778296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +199,7 @@ MonoBehaviour:
   currentHealth: 500
   deathEffect: {fileID: 0}
   deathEffectDuration: 0
+  points: 100
 --- !u!114 &222489526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,8 +294,62 @@ Transform:
   m_LocalScale: {x: 300, y: 1000, z: 300}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &417936440
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400006, guid: 5cb5b34bd3b2a7145ab58bdad5227507, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 244
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 5cb5b34bd3b2a7145ab58bdad5227507, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -400
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 5cb5b34bd3b2a7145ab58bdad5227507, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 37
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 5cb5b34bd3b2a7145ab58bdad5227507, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 5cb5b34bd3b2a7145ab58bdad5227507, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 5cb5b34bd3b2a7145ab58bdad5227507, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 5cb5b34bd3b2a7145ab58bdad5227507, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 5cb5b34bd3b2a7145ab58bdad5227507, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 5cb5b34bd3b2a7145ab58bdad5227507, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 5cb5b34bd3b2a7145ab58bdad5227507, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 5cb5b34bd3b2a7145ab58bdad5227507, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 300
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 5cb5b34bd3b2a7145ab58bdad5227507, type: 3}
+  m_IsPrefabParent: 0
 --- !u!1 &585740267
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,7 +394,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &793513936 stripped
 GameObject:
@@ -355,6 +411,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc788d651a9770b48b92044614db42e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &851958809 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100004, guid: 5cb5b34bd3b2a7145ab58bdad5227507, type: 3}
+  m_PrefabInternal: {fileID: 417936440}
+--- !u!64 &851958811
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 851958809}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 5cb5b34bd3b2a7145ab58bdad5227507, type: 3}
 --- !u!1 &948323654 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100010, guid: c9cefa3480f311f44b7045979a78743a, type: 3}
@@ -373,6 +447,7 @@ MonoBehaviour:
   currentHealth: 500
   deathEffect: {fileID: 0}
   deathEffectDuration: 0
+  points: 100
 --- !u!114 &948323659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,6 +479,7 @@ MonoBehaviour:
   currentHealth: 500
   deathEffect: {fileID: 0}
   deathEffectDuration: 0
+  points: 100
 --- !u!114 &1132070520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,7 +553,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1230821167 stripped
 GameObject:
@@ -497,6 +573,7 @@ MonoBehaviour:
   currentHealth: 500
   deathEffect: {fileID: 0}
   deathEffectDuration: 0
+  points: 100
 --- !u!114 &1230821172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -547,7 +624,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4743966724696042, guid: b44e82e743b3d2a4dae5813fe9da6062, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 54908556076961338, guid: b44e82e743b3d2a4dae5813fe9da6062,
         type: 2}
@@ -575,6 +652,7 @@ MonoBehaviour:
   currentHealth: 500
   deathEffect: {fileID: 0}
   deathEffectDuration: 0
+  points: 100
 --- !u!114 &1704925672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -649,7 +727,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &1753485984
 Prefab:
