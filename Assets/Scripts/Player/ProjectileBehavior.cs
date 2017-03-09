@@ -7,6 +7,10 @@ namespace Pathogen.Player {
 
 		private int damage = 10;
 
+		void Start(){
+			Destroy (gameObject, 10f);
+		}
+
 		void OnCollisionEnter(Collision collision){
 			DestroyableBehavior target = collision.gameObject.GetComponent<DestroyableBehavior> ();
 			if (target != null) {

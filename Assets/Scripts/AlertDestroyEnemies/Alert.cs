@@ -21,7 +21,7 @@ public class Alert : MonoBehaviour{
     void OnTriggerEnter(Collider other)
     {
         PlayerBehavior target = other.gameObject.GetComponent<PlayerBehavior>();
-        if (target != null)
+		if (target != null && controllerReference != null)
         {
             controllerReference.spawnDestroy();
             controllerReference.lastKnown = target.transform.FindChild("Graphics").position;
@@ -33,7 +33,7 @@ public class Alert : MonoBehaviour{
     void OnTriggerStay(Collider other)
     {
         PlayerBehavior target = other.gameObject.GetComponent<PlayerBehavior>();
-        if (target != null)
+		if (target != null && controllerReference != null)
         {
             controllerReference.lastKnown = target.transform.FindChild("Graphics").position;
         }

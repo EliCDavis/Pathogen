@@ -198,6 +198,7 @@ MonoBehaviour:
   currentHealth: 1
   deathEffect: {fileID: 0}
   deathEffectDuration: 0
+  points: 1000
 --- !u!135 &135043478850268272
 SphereCollider:
   m_ObjectHideFlags: 1

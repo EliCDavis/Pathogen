@@ -4,10 +4,8 @@ using UnityEngine;
 using Pathogen.Scene.Brains;
 
 public class Destroy : MonoBehaviour {
-    float thisX;
-    float thisY;
-    float thisZ;
-    float speed = 2f;
+  
+    float speed = 150f;
     EnemyController controllerReference;
     
 	// Use this for initialization
@@ -19,19 +17,19 @@ public class Destroy : MonoBehaviour {
 	void Update () {
         if (controllerReference.detected == 1)
         {
-            this.transform.Translate((controllerReference.lastKnown - this.transform.position) * speed * Time.deltaTime);
-
+			Vector3 movementDirection = (controllerReference.lastKnown - transform.position).normalized;
+			transform.Translate (movementDirection * speed * Time.deltaTime);
         }
 		//move toward last konwn player position
 	}
+
     private void OnTriggerEnter(Collider other)
     {
         PlayerBehavior target = other.gameObject.GetComponent<PlayerBehavior>();
         if (target != null)
         {
-            //damage player
-            target.Damage(10, Pathogen.Player.DamageType.Destroyer);
-            Destroy(this.gameObject);
+            target.Damage(5, Pathogen.Player.DamageType.Destroyer);
+            Destroy(gameObject);
         }
 
     }

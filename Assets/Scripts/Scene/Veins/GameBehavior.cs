@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Pathogen.Player;
+using UnityEngine.SceneManagement;
 
 namespace Pathogen.Scene.Veins {
 
@@ -30,7 +31,7 @@ namespace Pathogen.Scene.Veins {
 		/// </summary>
 		private float timeElapsed = 0f;
 
-		private float timeNeededToComplete = 60f;
+		private float timeNeededToComplete = 20f;
 
 		[SerializeField]
 		private GameObject winMenu;
@@ -67,6 +68,11 @@ namespace Pathogen.Scene.Veins {
 		List<GameObject> veinsSpawned;
 
 		GameObject playerInstance;
+
+		public void LoadByIndex(int sceneIndex)
+		{
+			SceneManager.LoadScene(sceneIndex);
+		}
 
 		void Start() {
 			veinsSpawned = new List<GameObject> ();

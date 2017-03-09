@@ -9,11 +9,17 @@ namespace Pathogen.Scene.Brains {
 
 	public class PlayerBehavior : MonoBehaviour {
 
-		private float speed = 7.5f;
+		private float speed = 10f;
 
 		private float rotateSpeed = 90f;
 
 		private float maxVelocityChange = 10.0f;
+
+		[SerializeField]
+		private AudioSource painSound;
+
+		[SerializeField]
+		private EnemyController controller;
 
 		[SerializeField]
 		/// <summary>
@@ -52,8 +58,13 @@ namespace Pathogen.Scene.Brains {
 		void Start() {
 			rb = gameObject.GetComponent<Rigidbody> ();
 		}
+			
 
 		void Update() {
+
+			if (Time.timeScale == 0) {
+				return;
+			}
 
 			// Calculate how fast we should be moving
 			Vector3 targetVelocity = new Vector3(0, Input.GetAxis("Vertical")*speed*.75f, speed);
@@ -84,6 +95,9 @@ namespace Pathogen.Scene.Brains {
 		public void Damage(int damage, DamageType typeOfDamage){
 
 			health = Mathf.Max (health - Mathf.Abs(damage), 0);
+
+			painSound.Play ();
+
 			if (health == 0) {
 
 				string deathMessage;
@@ -92,6 +106,10 @@ namespace Pathogen.Scene.Brains {
 
 				case DamageType.Collision:
 					deathMessage = "Stop running into things!";
+					break;
+
+				case DamageType.Destroyer:
+					deathMessage = "You got taken down by the cells!";
 					break;
 
 				default:
@@ -127,6 +145,8 @@ namespace Pathogen.Scene.Brains {
 		/// </summary>
 		/// <param name="reason">Reason the player died.</param>
 		private void Die(string reason){
+			controller.OpenDeathScreen (reason);
+
 			playerCamera.transform.parent = null;
 			Destroy (playerCamera.GetComponent<ProtectCameraFromWallClip> ());
 			GameObject deathEffectInstance = Instantiate (deathEffect, graphics.transform.position, Quaternion.identity);
@@ -147,6 +167,10 @@ namespace Pathogen.Scene.Brains {
 			blur.velocityScale = 0;
 		}
 
+
+		public int GetHealth(){
+			return this.health;
+		}
 	}
 
 }
