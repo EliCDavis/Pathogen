@@ -36,16 +36,39 @@ namespace Pathogen.Scene.Veins {
 			veinsSpawned = new List<GameObject> ();
 			StartGame ();
 			StartCoroutine (AnimateHeartbeat ());
+			CloseAllMenus ();
 		}
 
 		void Update(){
-			if(Input.GetKeyUp(KeyCode.P)){
-
+			if(Input.GetKeyUp (KeyCode.P) && CanTogglePause()){
+				TogglePause ();
 			}
 		}
 
-		public void UnPauseGame(){
-			pauseMenu.SetActive (false);
+		/// <summary>
+		/// Determines whether the player can toggle pause.
+		/// </summary>
+		/// <returns><c>true</c> if this instance can toggle pause; otherwise, <c>false</c>.</returns>
+		private bool CanTogglePause(){
+			return currentState == GameState.Paused || currentState == GameState.Started;
+		}
+
+		/// <summary>
+		/// Opens and closes the pause menu as well as
+		/// </summary>
+		private void TogglePause() {
+			if (CurrentlyPaused()) {
+				pauseMenu.SetActive (false);
+				Time.timeScale = 1;
+			} else {
+				pauseMenu.SetActive (true);
+				Time.timeScale = 0;
+			}
+		}
+
+		// Whether or not we're currently paused
+		private bool CurrentlyPaused() {
+			return pauseMenu.activeSelf;
 		}
 
 		private void StartGame() {
@@ -59,6 +82,10 @@ namespace Pathogen.Scene.Veins {
 
 		private GameObject LoadPlayer() {
 			return Instantiate(Resources.Load <GameObject>("Rails/Player"), Vector3.zero, Quaternion.identity);
+		}
+
+		private void CloseAllMenus() {
+			pauseMenu.SetActive (false);
 		}
 
 
