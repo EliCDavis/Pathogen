@@ -21,7 +21,7 @@ public class BrainPart : MonoBehaviour {
         }
         if (healthReference.getHealth() == 400 && spawn == 0)
         {
-            for(int i = 0; i < 10; i++)
+            for(int i = 0; i < 5; i++)
             {
                 enemyReference.spawnAlert();
             }
@@ -33,7 +33,7 @@ public class BrainPart : MonoBehaviour {
         }
         if (healthReference.getHealth() == 300 && spawn == 0)
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 5; i++)
             {
                 enemyReference.spawnAlert();
             }
@@ -45,7 +45,7 @@ public class BrainPart : MonoBehaviour {
         }
         if (healthReference.getHealth() == 200 && spawn == 0)
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 5; i++)
             {
                 enemyReference.spawnAlert();
             }
@@ -53,7 +53,7 @@ public class BrainPart : MonoBehaviour {
         }
         if (healthReference.getHealth() == 100 && spawn == 0)
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 5; i++)
             {
                 enemyReference.spawnAlert();
             }
