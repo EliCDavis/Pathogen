@@ -20,6 +20,9 @@ namespace Pathogen.Player {
 		private Transform bulletSpawn;
 
 		[SerializeField]
+		private AudioSource painSound;
+
+		[SerializeField]
 		/// <summary>
 		/// The bullet that will spawn from the player when they shoot
 		/// </summary>
@@ -138,6 +141,7 @@ namespace Pathogen.Player {
 		public void Damage(int damage, DamageType typeOfDamage){
 
 			health = Mathf.Max (health - Mathf.Abs(damage), 0);
+			painSound.Play ();
 			if (health == 0) {
 
 				string deathMessage;
