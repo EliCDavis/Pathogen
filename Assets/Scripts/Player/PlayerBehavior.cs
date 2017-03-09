@@ -66,6 +66,7 @@ namespace Pathogen.Player {
 		void Update () {
 			transform.Translate (Vector3.forward * playerSpeed * Time.deltaTime);
 			InputUpdate ();
+			MonitorInputToBeginGame ();
 		}
 
 		void InputUpdate() {
@@ -78,6 +79,28 @@ namespace Pathogen.Player {
 
 		public void SetGameBehavior(GameBehavior game){
 			this.gameBehavior = game;
+		}
+
+		private bool hasStarted = false;
+		private bool hasMoved = false; 
+		private bool hasShot = false;
+		private void MonitorInputToBeginGame() {
+			if (hasStarted) {
+				return;
+			}
+
+			if(Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0){
+				hasMoved = true;
+			}
+
+			if(Input.GetKeyDown (KeyCode.Space)){
+				hasShot = true;
+			}
+
+			if(hasMoved && hasShot){
+				hasStarted = true;
+				this.gameBehavior.StartGame ();
+			}
 		}
 
 		/// <summary>

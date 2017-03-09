@@ -32,6 +32,9 @@ namespace Pathogen.Scene.Veins {
 		private GameObject deathMenu;
 
 		[SerializeField]
+		private GameObject howTo;
+
+		[SerializeField]
 		private Text deathText;
 
 		private List<GameObject> redCellsInScene;
@@ -42,9 +45,11 @@ namespace Pathogen.Scene.Veins {
 
 		void Start() {
 			veinsSpawned = new List<GameObject> ();
-			StartGame ();
 			StartCoroutine (AnimateHeartbeat ());
 			CloseAllMenus ();
+			howTo.SetActive (true);
+			playerInstance = LoadPlayer ();
+			StartCoroutine (SpawnVeinSections ());
 		}
 
 		void Update(){
@@ -79,13 +84,11 @@ namespace Pathogen.Scene.Veins {
 			return pauseMenu.activeSelf;
 		}
 
-		private void StartGame() {
+		public void StartGame() {
 			redCellsInScene = new List<GameObject> ();
 			currentState = GameState.Started;
-			playerInstance = LoadPlayer ();
-			playerInstance.transform.position = Vector3.zero;
-			StartCoroutine (SpawnVeinSections ());
 			StartCoroutine (SpawnBloodCells());
+			howTo.SetActive (false);
 		}
 
 		public void PlayerDied(string reason){
@@ -104,6 +107,7 @@ namespace Pathogen.Scene.Veins {
 		private void CloseAllMenus() {
 			pauseMenu.SetActive (false);
 			deathMenu.SetActive (false);
+			howTo.SetActive (false);
 		}
 
 
@@ -116,7 +120,7 @@ namespace Pathogen.Scene.Veins {
 
 				while(playerInstance.transform.position.z > (veinsSpawned.Count-10) * 27.0f){
 
-					if (Random.Range (0, 1f) > .8f && veinsSpawned.Count > 10) {
+					if (Random.Range (0, 1f) > .8f && currentState == GameState.Started) {
 						veinsSpawned.Add(VeinFactory.CreateVein (new Vector3(0, -1, veinsSpawned.Count*27), Random.Range(-90, 0)));
 					} else {
 						veinsSpawned.Add(VeinFactory.CreateVein (new Vector3(0, -1, veinsSpawned.Count*27)));
