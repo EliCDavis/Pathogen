@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.ImageEffects;
 using UnityStandardAssets.Cameras;
+using Pathogen.Scene.Veins;
 
 namespace Pathogen.Player {
 
@@ -44,6 +45,11 @@ namespace Pathogen.Player {
 		/// </summary>
 		private GameObject playerCamera;
 
+		/// <summary>
+		/// Reference to the game behavior in the scene
+		/// </summary>
+		private GameBehavior gameBehavior; 
+
 		[SerializeField]
 		/// <summary>
 		/// The effect that will play when the player dies
@@ -60,6 +66,11 @@ namespace Pathogen.Player {
 		void Update () {
 			transform.Translate (Vector3.forward * playerSpeed * Time.deltaTime);
 			InputUpdate ();
+			MonitorInputToBeginGame ();
+		}
+
+		public int GetHealth(){
+			return this.health;
 		}
 
 		void InputUpdate() {
@@ -67,6 +78,32 @@ namespace Pathogen.Player {
 
 			if (Input.GetKeyDown (KeyCode.Space)) {
 				Shoot ();
+			}
+		}
+
+		public void SetGameBehavior(GameBehavior game){
+			this.gameBehavior = game;
+		}
+
+		private bool hasStarted = false;
+		private bool hasMoved = false; 
+		private bool hasShot = false;
+		private void MonitorInputToBeginGame() {
+			if (hasStarted) {
+				return;
+			}
+
+			if(Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0){
+				hasMoved = true;
+			}
+
+			if(Input.GetKeyDown (KeyCode.Space)){
+				hasShot = true;
+			}
+
+			if(hasMoved && hasShot){
+				hasStarted = true;
+				this.gameBehavior.StartGame ();
 			}
 		}
 
@@ -143,9 +180,9 @@ namespace Pathogen.Player {
 		/// </summary>
 		/// <param name="reason">Reason the player died.</param>
 		private void Die(string reason){
-			playerCamera.transform.parent = null;
-			Destroy (playerCamera.GetComponent<ProtectCameraFromWallClip> ());
+			DetachCamera ();
 			GameObject deathEffectInstance = Instantiate (deathEffect, graphics.transform.position, Quaternion.identity);
+			gameBehavior.PlayerDied (reason);
 			Destroy (deathEffectInstance, .95f);
 			Destroy (transform.gameObject);
 		}
@@ -161,6 +198,11 @@ namespace Pathogen.Player {
 			blur.velocityScale = 34;
 			yield return new WaitForSeconds(.5f);
 			blur.velocityScale = 0;
+		}
+
+		public void DetachCamera() {
+			playerCamera.transform.parent = null;
+			Destroy (playerCamera.GetComponent<ProtectCameraFromWallClip> ());
 		}
 
 	}
