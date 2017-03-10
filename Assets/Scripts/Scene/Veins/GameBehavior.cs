@@ -31,7 +31,7 @@ namespace Pathogen.Scene.Veins {
 		/// </summary>
 		private float timeElapsed = 0f;
 
-		private float timeNeededToComplete = 20f;
+		private float timeNeededToComplete = 60f;
 
 		[SerializeField]
 		private GameObject winMenu;

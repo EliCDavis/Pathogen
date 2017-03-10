@@ -84,8 +84,11 @@ public class EnemyController : MonoBehaviour
 		if(Input.GetKeyUp (KeyCode.P) && CanTogglePause()){
 			TogglePause ();
 		}
-		hudScore.text = "" + ScoreManager.GetInstance ().GetStagedScore ();
-		hudHealth.value = player.GetComponent<PlayerBehavior> ().GetHealth ()/100f;
+	
+		if (player != null) {
+			hudScore.text = "" + ScoreManager.GetInstance ().GetStagedScore ();
+			hudHealth.value = player.GetComponent<PlayerBehavior> ().GetHealth () / 100f;
+		}
 
 		if (hud.activeSelf) {
 			for (int i = 0; i < brainParts.Length; i++) {
@@ -134,10 +137,11 @@ public class EnemyController : MonoBehaviour
 	}
 
 	public void MainMenu() {
-		SceneManager.LoadScene (1);
+		SceneManager.LoadScene (0);
 	}
 
 	public void StartGame() {
+		ScoreManager.GetInstance ().ClearStagedScores ();
 		player.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 		Time.timeScale = 1;
 		CloseAllScreens ();
